@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -48,4 +49,30 @@ class Product extends Model
             'id'
         );
      }
+
+
+      // Accessors:
+    // get{AttrName}Attribute
+    // $product->image_url
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+
+            return asset('uploads/' . $this->image);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . $this->name;
+    }
+
+    // Mutators
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Str::title($value);
+    }
+
+    //relation with ProductImage
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class,'product_id','id');
+    }
 }

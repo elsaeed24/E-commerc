@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
@@ -34,7 +36,8 @@ class ProductController extends Controller
 
         return view('admin.products.create',[
             'product' => new Product(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => ''
         ]);
     }
 
@@ -54,7 +57,28 @@ class ProductController extends Controller
 
         $data['image'] = uploadImage($request,'image','Products');
 
-        Product::create($data);
+
+       $product = Product::create($data);
+
+        $product->tags()->attach($this->getTags($request));
+
+         // Gallery
+         if ($request->hasFile('gallery')) {
+            foreach ( $request->file('gallery') as $file ) {
+                $image_path = $file->store('GalleryProducts', [
+                    'disk' => 'uploads'
+                ]);
+                $product->images()->create([
+                    'image_path' => $image_path,
+                ]);
+                // $image = new ProductImage([
+                //     'image_path' => $image_path,
+                // ]);
+                // $product->images()->save($image);
+            }
+        }
+
+
 
 
               //PRG  post redirect get
@@ -78,8 +102,13 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit',compact('product','categories'));
+        $tags = $product->tags()->pluck('name')->toArray();
+
+        return view('admin.products.edit', [
+            'product' => $product,
+            'categories' => Category::all(),
+            'tags' => implode(',', $tags),
+        ]);
     }
 
     /**
@@ -98,9 +127,13 @@ class ProductController extends Controller
 
         $product->update($data);
 
+        $product->tags()->sync($this->getTags($request));
+
         if($old_image && $new_image){     // isset () is exists and null return false
             Storage::disk('uploads')->delete($old_image);
            }
+
+
 
        //PRG  post redirect get
        return redirect()
@@ -126,5 +159,32 @@ class ProductController extends Controller
        return redirect()
        ->route('products.index')
        ->with('success', 'Product Deleted'); // flash message
+    }
+
+    protected function getTags(Request $request)
+    {
+        $tag_ids = [];
+
+        $tags = $request->post('tags');
+        $tags = json_decode($tags);
+        //DB::table('product_tag')->where('product_id', '=', $product->id)->delete();
+        if (is_array($tags) && count($tags) > 0) {
+
+            foreach ($tags as $tag) {
+                $tag_name = $tag->value;
+                $tagModel = Tag::firstOrCreate([
+                    'name' => $tag_name
+                ], [
+                    'slug' => Str::slug($tag_name)
+                ]);
+
+                /*DB:table('product_tag')->insert([
+                    'product_id' => $product->id,
+                    'tag_id' => $tagModel->id,
+                ]);*/
+                $tag_ids[] = $tagModel->id;
+            }
+        }
+        return $tag_ids;
     }
 }

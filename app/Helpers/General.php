@@ -15,3 +15,19 @@ function uploadImage(Request $request,$name,$title){
         ]);
         return $path;
 }
+
+
+// Gallery
+
+// function uploadGalleryImages(Request $request,$name,$title){
+//         if (!$request->hasFile($name)) {
+//             return;
+//         }
+//             foreach ( $request->file($name) as $file ) {
+//                 $image_path = $file->store($title, [
+//                     'disk' => 'uploads'
+//                 ]);
+//             }
+//             return $image_path;
+//         }
+

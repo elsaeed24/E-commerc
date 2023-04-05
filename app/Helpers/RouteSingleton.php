@@ -20,11 +20,21 @@ class RouteSingleton
        return self::$instance;
     }
 
-    public function addRoute($method,$url,$action,$name=null)
+    public function addRoute($method,$url,$action)
     {
-       Route::$method($url,$action);
+        Route::$method($url,$action);
 
     }
+
+    public function addController($method,$url,$controller,$action,$name=null)
+    {
+       $route = Route::$method($url,$controller.'@'. $action);
+       if($name){
+        $route->name($name);
+       }
+
+    }
+
 
 
 

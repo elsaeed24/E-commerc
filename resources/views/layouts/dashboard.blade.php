@@ -23,6 +23,8 @@
      <!-- Custom styles for datatables -->
      <link href="{{ asset('dashboard/assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+     @stack('css')
+
 </head>
 
 <body id="page-top">
@@ -46,21 +48,24 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <a class="nav-link" href={{ route('dashboard.index') }}>
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
                <!-- Nav Item - Dashboard -->
                <li class="nav-item active">
                 <a class="nav-link" href="{{ route('categories.index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-tags nav-icon"></i>
                     <span>Categories</span></a>
             </li>
              <!-- Nav Item - Dashboard -->
              <li class="nav-item active">
                 <a class="nav-link" href="{{ route('products.index') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-box nav-icon"></i>
                     <span>Products</span></a>
             </li>
 
@@ -454,6 +459,8 @@
 
      <!-- Page level custom scripts datatables -->
      <script src="{{ asset('dashboard/assets/js/demo/datatables-demo.js')}}"></script>
+
+     @stack('js')
 
 </body>
 
