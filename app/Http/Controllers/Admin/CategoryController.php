@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Stmt\Catch_;
+
 
 class CategoryController extends Controller
 {
@@ -55,8 +55,7 @@ class CategoryController extends Controller
         $parents = Category::orderBy('name', 'asc')->get();
         return view('admin.categories.create', [
             'parents' => $parents,
-
-           // 'category' => new Category(),
+            'category' => new Category(),
         ]);
     }
 

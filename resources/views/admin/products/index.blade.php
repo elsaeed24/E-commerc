@@ -1,4 +1,4 @@
-<x-dashboard-layout title="Categories">
+<x-dashboard-layout title="Products">
 
 {{-- @extends('layouts.dashboard')
 
@@ -27,8 +27,8 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h3 style="display: inline-block;" class="m-0 font-weight-bold">Categories</h3>
-        <a  href="{{ route('categories.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
+        <h3 style="display: inline-block;" class="m-0 font-weight-bold">Products</h3>
+        <a  href="{{ route('products.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -49,22 +49,27 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Parent Name</th>
-                        <th>Created At</th>
+                        <th>Category </th>
+                        <th>Price </th>
+                        <th>Quantity </th>
                         <th>Status</th>
+                        <th>Created At</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($categories as $category)
+                    @forelse ($products as $product)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td><a href="{{ route('categories.edit', $category->id)}}">{{$category->name}}</a></td>
-                        <td>{{ $category->parent->name }}</td>
-                        <td>{{ $category->created_at }}</td>
-                        <td>{{ $category->status }}</td>
+                        <td>{{ $product->id }}</td>
+                        <td><a href="{{ route('products.edit', $product->id)}}">{{$product->name}}</a></td>
+                        <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->quantity }}</td>
+                        <td>{{ $product->status }}</td>
+                        <td>{{ $product->created_at }}</td>
+
                         <td>
-                            <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                            <form action="{{ route('products.destroy', $product->id) }}" method="post">
                                 @csrf
                                 {{-- from method spoofing --}}
                                 @method('delete')
@@ -77,7 +82,7 @@
 
                     @empty
                     <tr>
-                        <td colspan="6">No Categories Defined.</td>
+                        <td colspan="6">No Products Defined.</td>
                     </tr>
 
                     @endforelse

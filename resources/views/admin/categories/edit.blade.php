@@ -1,8 +1,10 @@
-@extends('layouts.dashboard')
+<x-dashboard-layout title="Categories">
+
+{{-- @extends('layouts.dashboard')
 
 @section('title', 'Categories')
 
-@section('content')
+@section('content') --}}
 
     <!-- Page Heading -->
     {{-- <h1 class="h3 mb-2 text-gray-800">Categories</h1> --}}
@@ -22,9 +24,26 @@
 
             <form action="{{ route('categories.update', $category->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
-                {{ method_field('PUT') }}
+                @method('put')
 
-                {{-- @if ($errors->any())
+                @include('admin.categories._form',[
+                    'button_label' => 'Update'
+                ])
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+{{-- @endsection --}}
+
+</x-dashboard-layout>
+
+
+
+ {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <h3>Error Occured!</h3>
                         <ul>
@@ -34,7 +53,7 @@
                         </ul>
                     </div>
                 @endif --}}
-
+{{--
                 <div class="form-group mb-3">
                     <label for="">Name:</label>
                     <input type="text" name="name" value="{{ $category->name }}"
@@ -92,14 +111,4 @@
                  </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-
-
-            </form>
-
-
-
-        </div>
-    </div>
-
-@endsection
+                </div> --}}

@@ -1,4 +1,4 @@
-<x-dashboard-layout title="Categories">
+<x-dashboard-layout title="Products">
 
 {{-- @extends('layouts.dashboard')
 
@@ -17,15 +17,15 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 style="display: inline-block;" class="m-0 font-weight-bold">Add Category</h3>
+            <h3 style="display: inline-block;" class="m-0 font-weight-bold">Add Product</h3>
 
         </div>
         <div class="card-body">
 
-            <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
-                @include('admin.categories._form')
+                @include('admin.products._form')
 
             </form>
         </div>

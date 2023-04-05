@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> @yield('title') </title>
+    <title> {{ $title ?? "Default Page" }} </title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('dashboard/assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -56,6 +56,12 @@
                 <a class="nav-link" href="{{ route('categories.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Categories</span></a>
+            </li>
+             <!-- Nav Item - Dashboard -->
+             <li class="nav-item active">
+                <a class="nav-link" href="{{ route('products.index') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Products</span></a>
             </li>
 
             <!-- Divider -->
@@ -375,7 +381,9 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    @yield('content')
+                    {{-- @yield('content') --}}
+
+                    {{ $slot }}
 
                 </div>
                 <!-- /.container-fluid -->

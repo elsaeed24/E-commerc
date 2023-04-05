@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryRequest extends FormRequest
 {
@@ -30,9 +31,9 @@ class CategoryRequest extends FormRequest
                 'string',
                 'max:255',
                 'min:3',
-                //"unique:categories,name,$id",
-                //(new Unique('categories', 'name'))->ignore($id),
-                //Rule::unique('categories', 'name')->ignore($id),
+                'unique:categories,name,$id'
+               // (new Unique('categories', 'name'))->ignore($id),
+               // Rule::unique('categories', 'name')->ignore($id),
             ],
             'description' => [
                 'required',

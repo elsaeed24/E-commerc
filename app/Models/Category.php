@@ -15,10 +15,21 @@ class Category extends Model
 
     ];
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id')->withDefault([
             'name' => 'No Parent'
         ]);
+    }
+
+    // one category has many products
+    public function products()
+    {
+        return $this->hasMany(Product::class,'category_id','id');
     }
 }

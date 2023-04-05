@@ -18,7 +18,6 @@ return new class extends Migration
 
             // name VARCHAR(255) NOT_NULL
             $table->string('name');
-
             $table->string('slug')->unique();
             $table->char('currency',3)->default('USD');
             $table->char('locale',2)->default('en');
