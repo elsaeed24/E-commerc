@@ -40,8 +40,10 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text">Store Manager</div>
             </a>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -348,10 +350,12 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
+                        {{-- @if (Auth::guard('web')->check()) --}}
+                         @auth('store')
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('store')->user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('dashboard/assets/img/undraw_profile.svg')}}">
                             </a>
@@ -371,12 +375,14 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
+                        @endauth
+                        {{-- @endif --}}
 
                     </ul>
 
@@ -430,7 +436,10 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="#" onclick="document.getElementById('logout').submit()">Logout</a>
+                    <form id="logout" class="d-none" action="{{ route('logout') }}" method="post">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>

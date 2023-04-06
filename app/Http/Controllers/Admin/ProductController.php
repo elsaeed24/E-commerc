@@ -50,7 +50,7 @@ class ProductController extends Controller
           // Request Merge
         $request->merge([   // use to filed not exist in request
             'slug' => Str::slug($request->post('name')),
-            'store_id' => 1
+            'store_id' => 6
            ]);
 
          $data = $request->except('image');

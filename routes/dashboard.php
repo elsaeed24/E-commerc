@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Auth\AuthStore\LoginController;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth:store')->group(function () {
 
     $router = RouteSingleton::getInstance();    // only one object only from class
 
@@ -14,6 +15,20 @@ Route::prefix('admin')->group(function () {
     $router->addController('get','dashboard', DashboardController::class,'index','dashboard.index');
 
 });
+
+Route::prefix('admin')->middleware('guest:store')->group(function () {
+
+
+    Route::get('login', [LoginController::class, 'create'])
+                ->name('stores.login');
+
+    Route::post('login', [LoginController::class, 'store']);
+
+});
+
+
+
+
 
 //Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 //Route::get('admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');

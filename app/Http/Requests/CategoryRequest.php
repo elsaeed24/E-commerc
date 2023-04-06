@@ -66,4 +66,6 @@ class CategoryRequest extends FormRequest
             'name.required' => 'Requird!!',
         ];
     }
+
+
 }
