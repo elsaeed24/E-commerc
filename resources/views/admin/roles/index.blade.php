@@ -1,4 +1,4 @@
-<x-dashboard-layout title="Products">
+<x-dashboard-layout title="Roles">
 
 {{-- @extends('layouts.dashboard')
 
@@ -27,9 +27,9 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h3 style="display: inline-block;" class="m-0 font-weight-bold">Products</h3>
-        @can('create', App\Models\Product::class)
-        <a  href="{{ route('products.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
+        <h3 style="display: inline-block;" class="m-0 font-weight-bold">Roles</h3>
+        @can('create', App\Models\Role::class)
+        <a  href="{{ route('roles.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
         @endcan
     </div>
     <div class="card-body">
@@ -51,38 +51,27 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Category </th>
-                        <th>Price </th>
-                        <th>Quantity </th>
-                        <th>Status</th>
                         <th>Created At</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($products as $product)
+                    @forelse ($roles as $role)
                     <tr>
-                        <td>{{ $product->id }}</td>
-                        <td><a href="{{ route('products.edit', $product->id)}}">{{$product->name}}</a></td>
-                        <td>{{ $product->category->name }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->quantity }}</td>
-                        <td>{{ $product->status }}</td>
-                        <td>{{ $product->created_at }}</td>
+                        <td>{{ $role->id }}</td>
+                        <td><a href="{{ route('roles.edit', $role->id)}}">{{$role->name}}</a></td>
+
+                        <td>{{ $role->created_at }}</td>
 
                         <td>
-                            {{-- @if (Auth::guard('store')->user()->can('delete', $product))     --}}
-                            @can('delete', $product)
-
-                            <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                            @can('delete', $role)
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="post">
                                 @csrf
                                 {{-- from method spoofing --}}
                                 @method('delete')
-                                <button type="submit"  class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
 
                             </form>
-                            {{-- @endif --}}
-
                             @endcan
                         </td>
 
@@ -90,7 +79,7 @@
 
                     @empty
                     <tr>
-                        <td colspan="6">No Products Defined.</td>
+                        <td colspan="6">No Roles Defined.</td>
                     </tr>
 
                     @endforelse
@@ -100,7 +89,6 @@
         </div>
     </div>
 </div>
-
 
 
 

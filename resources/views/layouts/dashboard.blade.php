@@ -71,6 +71,13 @@
                     <span>Products</span></a>
             </li>
 
+              <!-- Nav Item - Dashboard -->
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ route('roles.index') }}">
+                    <i class="fas fa-box nav-icon"></i>
+                    <span>Roles</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -375,7 +382,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{ route('stores.logout') }}" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -437,7 +444,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="#" onclick="document.getElementById('logout').submit()">Logout</a>
-                    <form id="logout" class="d-none" action="{{ route('logout') }}" method="post">
+                    <form id="logout" class="d-none" action="{{ route('stores.logout') }}" method="post">
                         @csrf
                     </form>
                 </div>

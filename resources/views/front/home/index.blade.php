@@ -2,7 +2,7 @@
     <div class="ps-banner">
         <div class="rev_slider fullscreenbanner" id="home-banner">
             <ul>
-                <li class="ps-banner" data-index="rs-2972" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src="{{ asset('assets/images/slider/3.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina>
+                <li class="ps-banner" data-index="rs-2972" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src="{{ asset('front/assets/images/slider/3.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina>
                     <div class="tp-caption ps-banner__header" id="layer-1" data-x="left" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-150','-120','-150','-170']" data-width="['none','none','none','400']" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:1000,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
                         <p>March 2002 <br> Nike SB Dunk Low Pro</p>
                     </div>
@@ -13,7 +13,7 @@
                         <p>Supa wanted something that was going to rep his East Coast <br> roots and, more specifically, his hometown of <br /> New York City in a big way.</p>
                     </div><a class="tp-caption ps-btn" id="layer31" href="#" data-x="['left','left','left','left']" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['120','140','200','200']" data-type="text" data-responsive_offset="on" data-textAlign="['center','center','center','center']" data-frames="[{&quot;delay&quot;:1500,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">Purchase Now<i class="ps-icon-next"></i></a>
                 </li>
-                <li class="ps-banner ps-banner--white" data-index="rs-100" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src="{{ asset('assets/images/slider/2.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina>
+                <li class="ps-banner ps-banner--white" data-index="rs-100" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src="{{ asset('front/assets/images/slider/2.jpg') }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina>
                     <div class="tp-caption ps-banner__header" id="layer20" data-x="left" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-150','-120','-150','-170']" data-width="['none','none','none','400']" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:1000,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
                         <p>BEST ITEM <br> THIS SUMMER</p>
                     </div>
@@ -43,16 +43,14 @@
             <div class="ps-section__content pb-50">
                 <div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
                     <div class="ps-masonry">
-
-                        {{-- <div class="grid-sizer"></div> --}}
-                        @foreach ($latest as $product)
-                        <div class="grid-item {{ $product->category->slug }}">
-
+                        <div class="grid-sizer"></div>
+                        {{-- @foreach ($latest as $product) --}}
+                        <div class="grid-item kids ">
                             <div class="grid-item__content-wrapper">
                                 <div class="ps-shoe mb-30">
                                     <div class="ps-shoe__thumbnail">
                                         <div class="ps-badge"><span>New</span></div>
-                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ $product->image_url }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
                                     </div>
                                     <div class="ps-shoe__content">
                                         <div class="ps-shoe__variants">
@@ -65,16 +63,208 @@
                                                 <option value="2">5</option>
                                             </select>
                                         </div>
-                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">{{ $product->name }}</a>
-                                            <p class="ps-shoe__categories"><a href="#">{{ $product->category->name }}</a></p><span class="ps-shoe__price">
-                                                <del>£{{ $product->price }}</del> £{{ $product->sale_price }}</span>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        @endforeach
+                        {{-- @endforeach --}}
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-item kids ">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+                                            <div class="ps-shoe__variant normal"><img src="{{ asset('front/assets/images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg') }}" alt=""></div>
+                                            <select class="ps-rating ps-shoe__rating">
+                                                <option value="1">1</option>
+                                                <option value="1">2</option>
+                                                <option value="1">3</option>
+                                                <option value="1">4</option>
+                                                <option value="2">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
+                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
+                                                <del>£ 23</del> £151</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
 
                     </div>
                 </div>
@@ -150,7 +340,7 @@
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
-                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -173,7 +363,7 @@
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
                                 <div class="ps-badge"><span>New</span></div>
-                                <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/2.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                                <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/2.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -196,7 +386,7 @@
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
-                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/3.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/3.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -217,7 +407,7 @@
                     </div>
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
-                            <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/4.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                            <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/4.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -239,7 +429,7 @@
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
-                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/5.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                                <div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/5.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -260,7 +450,7 @@
                     </div>
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
-                            <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('assets/images/shoe/6.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
+                            <div class="ps-shoe__thumbnail"><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/6.jpg') }}" alt=""><a class="ps-shoe__overlay" href="product-detail.html"></a>
                             </div>
                             <div class="ps-shoe__content">
                                 <div class="ps-shoe__variants">
@@ -347,7 +537,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-post">
-                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('assets/images/blog/1.jpg') }}" alt=""></div>
+                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('front/assets/images/blog/1.jpg') }}" alt=""></div>
                             <div class="ps-post__content"><a class="ps-post__title" href="blog-detail.html">An Inside Look at the Breaking2 Kit</a>
                                 <p class="ps-post__meta"><span>By:<a class="mr-5" href="blog.html">Alena Studio</a></span> -<span class="ml-5">Jun 10, 2017</span></p>
                                 <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a class="ps-morelink" href="blog-detail.html">Read more<i class="fa fa-long-arrow-right"></i></a>
@@ -356,7 +546,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-post">
-                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('assets/images/blog/2.jpg') }}" alt=""></div>
+                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('front/assets/images/blog/2.jpg') }}" alt=""></div>
                             <div class="ps-post__content"><a class="ps-post__title" href="blog-detail.html">Unpacking the Breaking2 Race Strategy</a>
                                 <p class="ps-post__meta"><span>By:<a class="mr-5" href="blog.html">Alena Studio</a></span> -<span class="ml-5">Jun 10, 2017</span></p>
                                 <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a class="ps-morelink" href="blog-detail.html">Read more<i class="fa fa-long-arrow-right"></i></a>
@@ -365,7 +555,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                         <div class="ps-post">
-                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('assets/images/blog/3.jpg') }}" alt=""></div>
+                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="blog-detail.html"></a><img src="{{ asset('front/assets/images/blog/3.jpg') }}" alt=""></div>
                             <div class="ps-post__content"><a class="ps-post__title" href="blog-detail.html">Nike’s Latest Football Cleat Breaks the Mold</a>
                                 <p class="ps-post__meta"><span>By:<a class="mr-5" href="blog.html">Alena Studio</a></span> -<span class="ml-5">Jun 10, 2017</span></p>
                                 <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a class="ps-morelink" href="blog-detail.html">Read more<i class="fa fa-long-arrow-right"></i></a>

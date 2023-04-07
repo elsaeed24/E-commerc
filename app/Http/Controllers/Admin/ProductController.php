@@ -10,6 +10,7 @@ use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -21,6 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->authorize('view-any', Product::class);   // policyProduct
+
+
         $products = Product::with('category')->latest()->orderBy('name', 'ASC')->paginate();
 
         return view('admin.products.index',[
@@ -33,6 +37,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Product::class);   // policyProduct
+       // Gate::authorize('product.create');
 
         return view('admin.products.create',[
             'product' => new Product(),
@@ -46,6 +52,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $this->authorize('create', Product::class);   // policyProduct
+       // Gate::authorize('product.create');
 
           // Request Merge
         $request->merge([   // use to filed not exist in request
@@ -93,6 +101,10 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+
+        $this->authorize('view', $product);   // policyProduct
+
+
         return view('admin.products.show',compact('product'));
     }
 
@@ -101,7 +113,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+       // Gate::authorize('product.update');
+
+
         $product = Product::findOrFail($id);
+
+        $this->authorize('update', $product);   // policyProduct
+
+
         $tags = $product->tags()->pluck('name')->toArray();
 
         return view('admin.products.edit', [
@@ -116,6 +135,9 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $this->authorize('update', $product);   // policyProduct
+       // Gate::authorize('product.update');
+
         $old_image = $product->image;
 
         $data = $request->except('image');
@@ -146,6 +168,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);   // policyProduct
+
         $old_image = $product->image;
 
         // Delete Old Image

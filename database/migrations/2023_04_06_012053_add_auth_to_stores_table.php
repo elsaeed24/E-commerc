@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable()->after('email');
             $table->string('password')->after('email_verified_at');
             $table->rememberToken()->after('password');
+            $table->enum('type',['super-admin','admin'])->default('admin')->after('remember_token');
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->dropColumn('email_verified_at');
             $table->dropColumn('password');
             $table->dropRememberToken();
+            $table->dropColumn('type');
         });
     }
 };

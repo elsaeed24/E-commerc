@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -38,5 +39,17 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('dashboard.index');
+    }
+
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('store')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('stores.login');
     }
 }

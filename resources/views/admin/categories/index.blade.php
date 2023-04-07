@@ -28,7 +28,9 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h3 style="display: inline-block;" class="m-0 font-weight-bold">Categories</h3>
+        @can('create', App\Models\Category::class)
         <a  href="{{ route('categories.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
+        @endcan
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -64,6 +66,7 @@
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->status }}</td>
                         <td>
+                            @can('delete', $category)
                             <form action="{{ route('categories.destroy', $category->id) }}" method="post">
                                 @csrf
                                 {{-- from method spoofing --}}
@@ -71,6 +74,7 @@
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
 
                             </form>
+                            @endcan
                         </td>
 
                     </tr>

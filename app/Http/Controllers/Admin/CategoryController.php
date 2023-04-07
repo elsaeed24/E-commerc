@@ -17,6 +17,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('view-any', Category::class);
         // $categories = Category::when($request->name, function($query, $value) {
 
         //         $query->where('name', 'LIKE', "%{$value}%")
@@ -52,6 +53,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Category::class);
+
         $parents = Category::orderBy('name', 'asc')->get();
         return view('admin.categories.create', [
             'parents' => $parents,
@@ -64,6 +67,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        $this->authorize('create', Category::class);
 
        // $data = $request->all();
 
@@ -98,6 +102,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->authorize('update',$category);
 
         $parents = Category::orderBy('name', 'asc')->get();
         return view('admin.categories.edit', compact('category','parents'));
@@ -108,6 +113,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
+        $this->authorize('update',$category);
+
         $old_image = $category->image;
 
         $data = $request->except('image');
@@ -136,6 +143,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
+
         $old_image = $category->image;
 
         // Delete Old Image
