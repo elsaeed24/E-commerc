@@ -11,9 +11,24 @@ Route::prefix('admin')->middleware('auth:store')->group(function () {
 
     $router = RouteSingleton::getInstance();    // only one object only from class
 
+
+
+
+    $router->addController('get','categories/trash', CategoryController::class,'trash','categories.trash');
+    $router->addController('put','categories/trash/{id}', CategoryController::class,'restore','categories.restore');
+    $router->addController('delete','categories/trash/{id}', CategoryController::class,'forceDelete','categories.force-delete');
     $router->addRoute('resource','categories',CategoryController::class);
+
+
+
+    $router->addController('get','products/trash', ProductController::class,'trash','products.trash');
+    $router->addController('put','products/trash/{id}', ProductController::class,'restore','products.restore');
+    $router->addController('delete','products/trash/{id}', ProductController::class,'forceDelete','products.force-delete');
     $router->addRoute('resource','products',ProductController::class);
+
     $router->addController('get','dashboard', DashboardController::class,'index','dashboard.index');
+
+
 
     $router->addRoute('resource','roles',RoleController::class);
 

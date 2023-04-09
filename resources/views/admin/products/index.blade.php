@@ -31,6 +31,9 @@
         @can('create', App\Models\Product::class)
         <a  href="{{ route('products.create') }}" class="btn btn-lg btn-outline-primary ml-2">Create</a>
         @endcan
+        @can('create', App\Models\Product::class)
+        <a  href="{{ route('products.trash') }}" class="btn btn-lg btn-outline-warning ml-2">Trash</a>
+        @endcan
     </div>
     <div class="card-body">
         <div class="table-responsive">

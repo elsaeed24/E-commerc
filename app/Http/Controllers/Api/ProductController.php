@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\Product;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Traits\ResponseTrait;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+
+class ProductController extends Controller
+{
+    use ResponseTrait;
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): JsonResponse
+    {
+        $product = Product::get();
+
+        return $this->responseSuccess($product,'Product List Fetch Successfully !');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(ProductRequest $request)
+    {
+
+        $request->merge([
+            'slug' => Str::slug($request->post('name')),
+            'store_id' => 6
+        ]);
+
+        $product = Product::create($request->all());
+
+        $product->refresh();   // return all data with default value
+
+        return $this->responseSuccess($product,'Product Create Successfully !');
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return $this->responseSuccess($product);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ProductRequest $request, Product $product)
+    {
+        $product->update($request->all());
+
+        return $this->responseSuccess($product,"Product Update Successfully");
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+      $product->delete();
+      return $this->responseSuccess($product,"Product Delete Successfully");
+    }
+}

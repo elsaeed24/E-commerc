@@ -159,4 +159,29 @@ class CategoryController extends Controller
        ->route('categories.index')
        ->with('success', 'Category Deleted'); // flash message
     }
+
+    public function trash()   // هيرجع العناصر المحذوفة فقط
+    {
+        return view('admin.categories.trash', [
+            'categories' => Category::onlyTrashed()->paginate(),
+        ]);
+    }
+    public function restore($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->restore();
+        return redirect()
+            ->route('categories.trash')
+            ->with('success', 'Category restored');
+    }
+
+    public function forceDelete($id)
+    {
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->forceDelete();
+        return redirect()
+            ->route('categories.trash')
+            ->with('success', 'Category deleted forever.');
+    }
+
 }

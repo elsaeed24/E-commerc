@@ -8,38 +8,54 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Repositories\Repository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\ProductRequest;
+use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+   
+    
+    // protected $product;
 
-    /**
-     * latest() by default ordring for created_at but possible select specific column for ordering latest('name')
-     * Display a listing of the resource.
-     */
-    public function index()
+    // public function __construct(RepositoryInterface $product){
+
+    //     $this->product = $product;
+    // }
+
+   /** 
+   * Authorize with PolicyProduct
+   * fetch all Product by repo
+   * show all product from this view 
+   */
+    public function index(Request $request)
     {
-        $this->authorize('view-any', Product::class);   // policyProduct
+       
+       $this->authorize('view-any', Product::class);   
+       
+       // $products = $this->product->all();
 
-
-        $products = Product::with('category')->latest()->orderBy('name', 'ASC')->paginate();
-
-        return view('admin.products.index',[
-            'products' => $products
-        ]);
+       $products = Product::with('category')
+                            ->latest()
+                            ->orderBy('name', 'ASC')
+                           // ->withoutGlobalScope('in-stock') // possible  withoutGlobalScopes() هيشل كل الجلوبل سكوب من الابليكشن ومن ضمنها السوفت ديليت
+                            //  ->status()    // local scope
+                            ->paginate();
+       
+        return view('admin.products.index',compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    /** 
+    * Authorize with PolicyProduct
+    */
     public function create()
     {
-        $this->authorize('create', Product::class);   // policyProduct
-       // Gate::authorize('product.create');
-
+        $this->authorize('create', Product::class);   
+       
         return view('admin.products.create',[
             'product' => new Product(),
             'categories' => Category::all(),
@@ -48,14 +64,16 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Authorize with PolicyProduct
+     
      */
     public function store(ProductRequest $request)
     {
-        $this->authorize('create', Product::class);   // policyProduct
-       // Gate::authorize('product.create');
+        $this->authorize('create', Product::class);  
+        
+        //$this->product->add($request);
 
-          // Request Merge
+        // Request Merge
         $request->merge([   // use to filed not exist in request
             'slug' => Str::slug($request->post('name')),
             'store_id' => 6
@@ -79,28 +97,22 @@ class ProductController extends Controller
                 $product->images()->create([
                     'image_path' => $image_path,
                 ]);
-                // $image = new ProductImage([
-                //     'image_path' => $image_path,
-                // ]);
-                // $product->images()->save($image);
+                
             }
         }
-
-
-
-
+       
               //PRG  post redirect get
               return redirect()
-              ->route('products.index')
-              ->with('success', 'Product Created'); // flash message
+                    ->route('products.index')
+                     ->with('success', 'Product Created'); // flash message
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
+       
 
         $this->authorize('view', $product);   // policyProduct
 
@@ -113,14 +125,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-       // Gate::authorize('product.update');
-
-
+    
         $product = Product::findOrFail($id);
-
-        $this->authorize('update', $product);   // policyProduct
-
-
         $tags = $product->tags()->pluck('name')->toArray();
 
         return view('admin.products.edit', [
@@ -133,28 +139,28 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
         $this->authorize('update', $product);   // policyProduct
-       // Gate::authorize('product.update');
+       
+       //$this->product->update($request,$product);
 
-        $old_image = $product->image;
+       $old_image = $product->image;
 
-        $data = $request->except('image');
+       $data = $request->except('image');
 
-        $new_image = uploadImage($request,'image','Products');
-        if($new_image){
-            $data['image']  = $new_image;
-        }
+       $new_image = uploadImage($request,'image','Products');
+       if($new_image){
+           $data['image']  = $new_image;
+       }
 
-        $product->update($data);
+       $product->update($data);
 
-        $product->tags()->sync($this->getTags($request));
+       $product->tags()->sync($this->getTags($request));
 
-        if($old_image && $new_image){     // isset () is exists and null return false
-            Storage::disk('uploads')->delete($old_image);
-           }
-
+       if($old_image && $new_image){     // isset () is exists and null return false
+           Storage::disk('uploads')->delete($old_image);
+          }
 
 
        //PRG  post redirect get
@@ -210,5 +216,29 @@ class ProductController extends Controller
             }
         }
         return $tag_ids;
+    }
+
+    public function trash()   // هيرجع العناصر المحذوفة فقط
+    {
+        return view('admin.products.trash', [
+            'products' => Product::onlyTrashed()->paginate(),
+        ]);
+    }
+    public function restore($id)
+    {
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->restore();
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Product restored');
+    }
+
+    public function forceDelete($id)
+    {
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->forceDelete();
+        return redirect()
+            ->route('products.trash')
+            ->with('success', 'Product deleted forever.');
     }
 }

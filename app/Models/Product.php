@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
    // protected $perPage = 10;   // default paginate if not pass number for paginate() in controller
 
@@ -23,6 +25,33 @@ class Product extends Model
 
     ];*/
 
+    //globalScope
+    //اول ما يتم انشاء اوبجكت من هذا المودل يتم تنفيذ هذا الميثود
+    // protected static function booted()
+    // {
+    //     static::addGlobalScope('in-stock', function(Builder $builder) {
+
+    //         $builder->where('status', '=', 'in-stock');
+    //     });
+    // }
+
+    // local scope
+    // name of function must be start (scope)
+
+    public function scopeSoldout(Builder $builder)
+    {
+        $builder->where('status', '=', 'sold-out');
+    }
+
+    // pass parameter in scope -----status('draft') but defauit in-stock
+
+    public function scopeStatus(Builder $builder, $status = 'in-stock')
+    {
+        $builder->where('status', '=', $status);
+    }
+
+
+
     //one product follow one store
     public function store()
     {
@@ -32,7 +61,7 @@ class Product extends Model
      //one product follow one category
      public function category()
      {
-         return $this->belongsTo(Category::class,'category_id','id');
+         return $this->belongsTo(Category::class,'category_id','id')->withDefault();
      }
 
 
@@ -75,4 +104,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class,'product_id','id');
     }
+
+
+
 }
