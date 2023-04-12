@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Auth\AuthStore\LoginController;
 
-Route::prefix('admin')->middleware('auth:store')->group(function () {
+Route::prefix('admin')->middleware('auth:store','notification.read')->group(function () {
 
     $router = RouteSingleton::getInstance();    // only one object only from class
 
@@ -26,11 +28,20 @@ Route::prefix('admin')->middleware('auth:store')->group(function () {
     $router->addController('delete','products/trash/{id}', ProductController::class,'forceDelete','products.force-delete');
     $router->addRoute('resource','products',ProductController::class);
 
+
+    $router->addController('get','orders/trash', OrderController::class,'trash','orders.trash');
+    $router->addController('put','orders/trash/{id}', OrderController::class,'restore','orders.restore');
+    $router->addController('delete','orders/trash/{id}', OrderController::class,'forceDelete','orders.force-delete');
+    $router->addRoute('resource','orders',OrderController::class);
+
+
     $router->addController('get','dashboard', DashboardController::class,'index','dashboard.index');
 
 
 
     $router->addRoute('resource','roles',RoleController::class);
+
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
 
 
    $router->addController('post','logout', LoginController::class,'destroy','stores.logout');

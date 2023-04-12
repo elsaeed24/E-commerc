@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 use App\Models\User;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 
@@ -65,9 +67,13 @@ class CheckoutController extends Controller
                 ]);
             }
 
-              Cart::where('cart_id',App::make('cart.id'))->delete();
+             // Cart::where('cart_id',App::make('cart.id'))->delete();
 
             DB::commit();
+
+            $store = Store::where('type','=','super-admin')->first();
+            $store->notify(new NewOrderNotification($order));
+
 
             return redirect()->route('home.index')->with('status', 'Thank you! Your order has been placed!');
 

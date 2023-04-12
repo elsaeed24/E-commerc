@@ -71,6 +71,13 @@
                     <span>Products</span></a>
             </li>
 
+             <!-- Nav Item - Dashboard -->
+             <li class="nav-item active">
+                <a class="nav-link" href="{{ route('orders.index') }}">
+                    <i class="fas fa-box nav-icon"></i>
+                    <span>Orders</span></a>
+            </li>
+
               <!-- Nav Item - Dashboard -->
               <li class="nav-item active">
                 <a class="nav-link" href="{{ route('roles.index') }}">
@@ -237,7 +244,7 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
+                        {{-- <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -287,6 +294,10 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
+
+ --}}
+
+                        <x-notifiction-menu/>
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
