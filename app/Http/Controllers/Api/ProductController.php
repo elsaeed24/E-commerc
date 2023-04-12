@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
     use ResponseTrait;
+
+    // حماية الاكشنز الا يوزر مسموح
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');//->except('index','show');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -68,6 +76,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $user= Auth::guard('sanctum')->user();
+        if(!$user->tokenCan('products.delete')){
+            return response([
+                'message' => 'Not allowed'
+            ], 403);
+        }
+
       $product->delete();
       return $this->responseSuccess($product,"Product Delete Successfully");
     }

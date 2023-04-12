@@ -20,12 +20,12 @@ trait ResponseTrait
         ], $ststus_code);
     }
 
-    public function responseError($errors,$message ="Data Is Invalid",$ststus_code = JsonResponse::HTTP_BAD_REQUEST): JsonResponse
+    public function responseError($message ="Data Is Invalid",$ststus_code = JsonResponse::HTTP_BAD_REQUEST): JsonResponse
     {
         return response()->json([
             'status' => false,
             'message' => $message,
-            'errors' => $errors,
+           // 'errors' => $errors,
             'data' => null
 
         ], $ststus_code);

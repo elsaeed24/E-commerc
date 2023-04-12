@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\Front\HomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProductController;
+use App\Http\Controllers\Front\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +28,18 @@ Route::get('/dashboard2', function () {
 
 
 
-Route::get('home',[HomeController::class,'index']);
+Route::get('home',[HomeController::class,'index'])->name('home.index');
+
+Route::get('products/{slug}', [ProductController::class, 'show'])->name('front.products.show');
+
+
+Route::get('cart',[CartController::class,'index'])->name('cart');
+Route::post('cart',[CartController::class,'store']);
+Route::delete('cart/{product_id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('checkout', [CheckoutController::class, 'store']);
 
 
 require __DIR__.'/dashboard.php';

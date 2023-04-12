@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind('cart.id',function(){
+            $id =Cookie::get('cart_id'); // الكوكي عبارة عن اسم وقيمة وفية اوبشن ثالث ممكن الكوكي يتحذف بشكل تلقائي بعد مدة
+            if(!$id){
+                $id = Str::uuid();
+                Cookie::queue('cart_id',$id, 60 * 24 * 30);
+            }
+
+            return $id;
+        });
     }
 }

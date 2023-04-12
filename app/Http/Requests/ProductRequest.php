@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'description' => 'nullable|string',
             'quantity' =>'numeric',
             'status' => 'in:in-stock,sold-out,draft',
-            'image' => 'image',
+            'image' => 'image|dimensions:width=800,hight=800',
             'price' => 'numeric|min:0',
             'sale_price' => ['numeric','min:0', function($attr,$value,$fail){
 

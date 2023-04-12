@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-   
-    
+
+
     // protected $product;
 
     // public function __construct(RepositoryInterface $product){
@@ -26,16 +26,16 @@ class ProductController extends Controller
     //     $this->product = $product;
     // }
 
-   /** 
+   /**
    * Authorize with PolicyProduct
    * fetch all Product by repo
-   * show all product from this view 
+   * show all product from this view
    */
     public function index(Request $request)
     {
-       
-       $this->authorize('view-any', Product::class);   
-       
+
+       $this->authorize('view-any', Product::class);
+
        // $products = $this->product->all();
 
        $products = Product::with('category')
@@ -44,18 +44,18 @@ class ProductController extends Controller
                            // ->withoutGlobalScope('in-stock') // possible  withoutGlobalScopes() هيشل كل الجلوبل سكوب من الابليكشن ومن ضمنها السوفت ديليت
                             //  ->status()    // local scope
                             ->paginate();
-       
+
         return view('admin.products.index',compact('products'));
     }
 
 
-    /** 
+    /**
     * Authorize with PolicyProduct
     */
     public function create()
     {
-        $this->authorize('create', Product::class);   
-       
+        $this->authorize('create', Product::class);
+
         return view('admin.products.create',[
             'product' => new Product(),
             'categories' => Category::all(),
@@ -65,12 +65,12 @@ class ProductController extends Controller
 
     /**
      * Authorize with PolicyProduct
-     
+
      */
     public function store(ProductRequest $request)
     {
-        $this->authorize('create', Product::class);  
-        
+        $this->authorize('create', Product::class);
+
         //$this->product->add($request);
 
         // Request Merge
@@ -97,10 +97,10 @@ class ProductController extends Controller
                 $product->images()->create([
                     'image_path' => $image_path,
                 ]);
-                
+
             }
         }
-       
+
               //PRG  post redirect get
               return redirect()
                     ->route('products.index')
@@ -112,7 +112,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-       
+
 
         $this->authorize('view', $product);   // policyProduct
 
@@ -125,7 +125,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-    
+
         $product = Product::findOrFail($id);
         $tags = $product->tags()->pluck('name')->toArray();
 
@@ -142,7 +142,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $this->authorize('update', $product);   // policyProduct
-       
+
        //$this->product->update($request,$product);
 
        $old_image = $product->image;
@@ -161,6 +161,19 @@ class ProductController extends Controller
        if($old_image && $new_image){     // isset () is exists and null return false
            Storage::disk('uploads')->delete($old_image);
           }
+
+           // Gallery
+         if ($request->hasFile('gallery')) {
+            foreach ( $request->file('gallery') as $file ) {
+                $image_path = $file->store('GalleryProducts', [
+                    'disk' => 'uploads'
+                ]);
+                $product->images()->create([
+                    'image_path' => $image_path,
+                ]);
+
+            }
+        }
 
 
        //PRG  post redirect get

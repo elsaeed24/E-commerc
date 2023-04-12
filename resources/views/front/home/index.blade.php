@@ -42,15 +42,17 @@
             </div>
             <div class="ps-section__content pb-50">
                 <div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
+
                     <div class="ps-masonry">
+
                         <div class="grid-sizer"></div>
-                        {{-- @foreach ($latest as $product) --}}
-                        <div class="grid-item kids ">
+                        @foreach ($latest as $product)
+                        <div class="grid-item {{ $product->category->slug }} ">
                             <div class="grid-item__content-wrapper">
                                 <div class="ps-shoe mb-30">
                                     <div class="ps-shoe__thumbnail">
                                         <div class="ps-badge"><span>New</span></div>
-                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ asset('front/assets/images/shoe/1.jpg') }}" alt=""><a class="ps-shoe__overlay" href="#"></a>
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="{{ $product->image_url }}" alt=""><a class="ps-shoe__overlay" href="{{ route('front.products.show', $product->slug) }}"></a>
                                     </div>
                                     <div class="ps-shoe__content">
                                         <div class="ps-shoe__variants">
@@ -63,17 +65,18 @@
                                                 <option value="2">5</option>
                                             </select>
                                         </div>
-                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="#">p1</a>
-                                            <p class="ps-shoe__categories"><a href="#">ahmed</a></p><span class="ps-shoe__price">
-                                                <del>£23</del> £151</span>
+                                        <div class="ps-shoe__detail"><a class="ps-shoe__name" href="{{ route('front.products.show', $product->slug) }}">{{ $product->name }}</a>
+                                            <p class="ps-shoe__categories"><a href="#">{{ $product->category->name }}</a></p><span class="ps-shoe__price">
+                                                <del>£{{ $product->price }}</del> £{{ $product->sale_price }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- @endforeach --}}
-                        <div class="grid-item kids ">
+                        @endforeach
+
+                        {{-- <div class="grid-item kids ">
                             <div class="grid-item__content-wrapper">
                                 <div class="ps-shoe mb-30">
                                     <div class="ps-shoe__thumbnail">
@@ -255,7 +258,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
 
 

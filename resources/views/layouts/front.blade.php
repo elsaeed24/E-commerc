@@ -28,7 +28,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/ps-icon/style.css') }}">
     <!-- CSS Library-->
     {{-- @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') --}}
-    <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.rtl.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.rtl.min.css') }}"> --}}
     {{-- @else --}}
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.min.css') }}">
     {{-- @endif --}}
@@ -43,7 +43,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/revolution/css/navigation.css') }}">
     <!-- Custom-->
     {{-- @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') --}}
-    <link rel="stylesheet" href="{{ asset('front/assets/css/style.rtl.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('front/assets/css/style.rtl.css') }}"> --}}
     {{-- @else --}}
     <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
     {{-- @endif --}}
@@ -65,7 +65,19 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
                   <p>460 West 34th Street, 15th floor, New York  -  Hotline: 804-377-3580 - 804-399-3580</p>
                 </div>
                 <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12 ">
-                  <div class="header__actions"><a href="#">Login & Regiser</a>
+
+                    @auth
+                    <div class="header__actions">
+                <a href="#"> Hi,{{ Auth::user()->name }} </a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit()">Sign Out</a>
+                    <form action="{{ route('logout') }}" id="logout" method="post" style="display:none">
+                        @csrf
+                    </form>
+                </div>
+                @else
+
+                    <div class="header__actions"><a href="{{ route('register') }}">Login & Regiser</a>
+
                     <div class="btn-group ps-dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD<i class="fa fa-angle-down"></i></a>
                       <ul class="dropdown-menu">
                         <li><a href="#"><img src="{{ asset('front/assets/images/flag/usa.svg') }}" alt=""> USD</a></li>
@@ -75,6 +87,8 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
                     </div>
                     {{-- <x-language-switcher /> --}}
                   </div>
+                  @endauth
+
                 </div>
           </div>
         </div>
@@ -199,7 +213,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
                         <p>Number of items:<span></span></p>
                         <p>Item Total:<span></span></p>
                     </div>
-                    <div class="ps-cart__footer"><a class="ps-btn" href="#">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                    <div class="ps-cart__footer"><a class="ps-btn" href="{{ route('checkout') }}">Check out<i class="ps-icon-arrow-left"></i></a></div>
                 </div>
             </div>
 
