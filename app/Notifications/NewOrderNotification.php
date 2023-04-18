@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class NewOrderNotification extends Notification
 {
@@ -30,7 +31,7 @@ class NewOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -55,6 +56,21 @@ class NewOrderNotification extends Notification
                 'icon' => 'fas fa-file',
                 'order_id' => $this->order->id,
         ];
+
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        $message = new BroadcastMessage([
+
+            'title' => 'New Order',
+            'body' => 'A new order has beeen created.',
+            'action' => url('admin/dashboard'),
+            'icon' => '',
+            'order_id' => $this->order->id,
+        ]);
+
+        return $message ;
 
     }
 

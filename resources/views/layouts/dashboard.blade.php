@@ -85,6 +85,13 @@
                     <span>Roles</span></a>
             </li>
 
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('setting.index') }}">
+                    <i class="fas fa-box nav-icon"></i>
+                    <span>Settings</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -486,6 +493,33 @@
 
      <!-- Page level custom scripts datatables -->
      <script src="{{ asset('dashboard/assets/js/demo/datatables-demo.js')}}"></script>
+{{--
+     <script>
+        const userID = "{{ Auth::id() }}";
+    </script>
+        <script src="{{ asset('build/assets/app-f3a261f5.js') }}"></script> --}}
+
+     <!-- start pusher -->
+
+     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('467cd36a44d5d7d24d96', {
+        cluster: 'eu',
+        authEndpoint: "/broadcasting/auth"
+        });
+
+        var channel = pusher.subscribe('private-App.Models.Store.{{ Auth::id() }}');
+        channel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', function(data) {
+        alert(data.title);
+        });
+    </script>
+
+     <!-- end pusher -->
+
+
 
      @stack('js')
 

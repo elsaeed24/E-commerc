@@ -379,5 +379,26 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <script type="text/javascript" src="{{ asset('dashboard/assets/js/messages.js') }}"></script>
     <script type="text/javascript" src="{{ asset('dashboard/assets/js/firebase.js') }}"></script>
     <script type="text/javascript" src="{{ asset('dashboard/assets/js/cart.js') }}"></script>
+
+     <script>
+        const userID = "{{ Auth::id() }}";
+    </script>
+        <script src="{{ asset('build/assets/app-f3a261f5.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('build/assets/messages-2650771f.js') }}"></script>
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('467cd36a44d5d7d24d96', {
+        cluster: 'eu',
+        authEndpoint: "/broadcasting/auth"
+        });
+
+        var channel = pusher.subscribe('presence-messages');
+        channel.bind('message.sent', e => {
+            $('#messages').append(e.message.message);
+        });
+    </script>
   </body>
 </html>

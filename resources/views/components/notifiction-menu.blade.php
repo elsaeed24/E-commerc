@@ -13,8 +13,8 @@
             {{ $NewCountNotification }} Notifications
         </h6>
         @foreach($notifications as $notification)
-        <a class="dropdown-item d-flex align-items-center  @if ($notification->unread()) text-bold @endif"
-            href="{{ $notification->data['action'] }}?notification_id={{ $notification->id }}">
+        <a class="dropdown-item d-flex align-items-center "
+            href="{{ $notification->data['action'] }}?notification_id={{ $notification->id }}"  @if ($notification->unread()) @style('color:blue')  @endif>
             <div class="mr-3">
                 <div class="icon-circle bg-primary">
                     <i class="{{ $notification->data['icon'] }}"></i>

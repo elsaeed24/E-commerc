@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\AuthStore\LoginController;
 
 Route::prefix('admin')->middleware('auth:store','notification.read')->group(function () {
@@ -36,6 +37,9 @@ Route::prefix('admin')->middleware('auth:store','notification.read')->group(func
 
 
     $router->addController('get','dashboard', DashboardController::class,'index','dashboard.index');
+
+    Route::get('settings', [SettingController::class,'index'])->name('setting.index');
+    Route::put('settings/update', [SettingController::class,'update'])->name('settings.update');
 
 
 

@@ -1,19 +1,6 @@
 <x-dashboard-layout title="Notifications">
 
-    {{-- @extends('layouts.dashboard')
 
-    @section('title', 'Categories')
-
-    @section('content') --}}
-
-    <!-- Page Heading -->
-    {{-- <h1 class="h3 mb-2 text-gray-800">Categories</h1> --}}
-    {{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p> --}}
-
-            {{-- <x-alert type='success'/>
-            <x-alert type='info'/> --}}
 
 
             <div x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 3000)">
@@ -68,13 +55,15 @@
 
         <div>
             @foreach ($notifications as $notification)
-            <div class="card my-2">
+            <div class="card my-2"  >
                 <a href="{{ $notification->data['action'] }}?notify_id={{ $notification->id }}">
                     <div class="card-body {{ $notification->unread()? 'bg-light fw-bold' : '' }}">
                         <h4>{{ $notification->data['title'] }}</h4>
                     </a>
                         <p>{{ $notification->data['body'] }}</p>
                         <p class="text-muted">{{ $notification->created_at->diffForHumans() }}</p>
+                        <p style="color: red">@if ($notification->unread()) unread  @endif</p>
+                        <p style="color:rgb(11, 250, 11)">@if ($notification->read()) read  @endif</p>
                     </div>
 
             </div>

@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\CheckoutController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,14 @@ Route::delete('cart/{product_id}', [CartController::class, 'destroy'])->name('ca
 
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('checkout', [CheckoutController::class, 'store']);
+
+Route::get('payments/{order}', [PaymentController::class, 'create'])->name('payments.create');
+Route::any('payments/paypal/callback', [PaymentController::class, 'callback'])->name('paypal.callback');
+Route::any('payments/paypal/cancel', [PaymentController::class, 'cancel'])->name('paypal.cancel');
+
+Route::get('messages', [MessageController::class, 'index'])->name('messages');
+Route::get('messages/{peer_id}', [MessageController::class, 'show'])->name('messages.peer');
+Route::post('messages/{peer_id}', [MessageController::class, 'store']);
 
 
 require __DIR__.'/dashboard.php';
