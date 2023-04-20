@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@yaireo/tagify": "^4.17.7",
+        "firebase": "^9.19.1",
         "laravel-echo": "^1.15.0",
         "pusher-js": "^8.0.2"
     }

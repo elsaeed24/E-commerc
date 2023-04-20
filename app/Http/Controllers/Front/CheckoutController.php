@@ -20,6 +20,10 @@ class CheckoutController extends Controller
 {
     public function index()
     {
+        User::find(7)->notify(new NewOrderNotification(new Order()));
+        return;
+
+
         $cart = Cart::with('product')
                 ->where('cart_id' , App::make('cart.id'))
                 ->get();

@@ -23,6 +23,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'name',
         'email',
         'password',
+        'device_token'
     ];
 
     /**
@@ -62,6 +63,16 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     public function receivedMessages()
     {
         return $this->hasMany(Message::class, 'recipient_id');
+    }
+
+    public function deviceTokens()
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+
+    public function routeNotificationForFcm($notification = null)
+    {
+        return $this->deviceTokens()->pluck('token')->toArray();
     }
 
 }

@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\DeviceTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,8 @@ Route::apiResource('products',ProductController::class);
 
 Route::post('login', [LoginController::class, 'login']);
 Route::post('register', [RegisterController::class, 'register']);
-Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');;
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Route::post('device-tokens', [DeviceTokenController::class, 'store'])
+    ->middleware('auth:sanctum');

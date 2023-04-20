@@ -10,6 +10,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
+use NotificationChannels\Fcm\FcmChannel;
+use NotificationChannels\Fcm\FcmMessage;
+use NotificationChannels\Fcm\Resources\AndroidConfig;
+use NotificationChannels\Fcm\Resources\AndroidFcmOptions;
+use NotificationChannels\Fcm\Resources\AndroidNotification;
+use NotificationChannels\Fcm\Resources\ApnsConfig;
+use NotificationChannels\Fcm\Resources\ApnsFcmOptions;
+
 class NewOrderNotification extends Notification
 {
     use Queueable;
@@ -31,7 +39,9 @@ class NewOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database','broadcast'];
+        // return ['database','broadcast', FcmChannel::class];
+
+        return [FcmChannel::class];
     }
 
     /**
@@ -72,6 +82,26 @@ class NewOrderNotification extends Notification
 
         return $message ;
 
+    }
+
+    public function toFcm($notifiable)
+    {
+        return FcmMessage::create()
+        ->setData([
+
+            'user' => $this->order->user->name,
+        ])
+            ->setNotification(\NotificationChannels\Fcm\Resources\Notification::create()
+            ->setTitle('New Order')
+            ->setBody('A new order has beeen created.')
+            ->setImage('http://example.com/url-to-image-here.png'))
+            ->setAndroid(
+                AndroidConfig::create()
+                    ->setFcmOptions(AndroidFcmOptions::create()->setAnalyticsLabel('analytics'))
+                    ->setNotification(AndroidNotification::create()->setColor('#0A0A0A'))
+            )->setApns(
+                ApnsConfig::create()
+                    ->setFcmOptions(ApnsFcmOptions::create()->setAnalyticsLabel('analytics_ios')));
     }
 
     /**

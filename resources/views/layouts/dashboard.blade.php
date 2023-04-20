@@ -493,6 +493,7 @@
 
      <!-- Page level custom scripts datatables -->
      <script src="{{ asset('dashboard/assets/js/demo/datatables-demo.js')}}"></script>
+     {{-- <script type="text/javascript" src="{{ asset('build/assets/firebase-49d1705e.js') }}"></script> --}}
 {{--
      <script>
         const userID = "{{ Auth::id() }}";
@@ -518,6 +519,9 @@
     </script>
 
      <!-- end pusher -->
+
+
+
 
 
 

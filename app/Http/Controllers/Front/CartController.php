@@ -10,11 +10,21 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
+use App\Models\Order;
+use App\Notifications\NewOrderNotification;
+use App\Models\User;
+
 
 class CartController extends Controller
 {
     public function index()
+
+
     {
+
+
+
+
         // app(cart.id)  or app()->make('cart.id')  or App::make('cart.id')      طرق لجلب القيمة من السيرفيز كونتينر
         $cart = Cart::with('product')
                     ->where('cart_id' , App::make('cart.id'))

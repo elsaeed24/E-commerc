@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Services\GeoIP\MaxMindGeoLite;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
           $config = config('services.maxmind');
@@ -21,4 +23,6 @@ class HomeController extends Controller
             'latest' => $latest
         ]);
     }
+
+
 }
