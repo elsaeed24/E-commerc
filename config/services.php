@@ -31,6 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vonage' => [
+        'vonage_key' => env('VONAGE_KEY'),
+        'vonage_secret' => env('VONAGE_SECRT'),
+    ],
+
     'maxmind' => [
         'account_id' => env('MAXMIND_ACCOUNT_ID'),
         'license_key' => env('MAXMIND_LICENSE_KEY'),

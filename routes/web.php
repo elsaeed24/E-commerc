@@ -31,6 +31,7 @@ Route::get('/dashboard2', function () {
 
 
 Route::get('home',[HomeController::class,'index'])->name('home.index');
+Route::get('sms',[HomeController::class,'sms']);
 
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('front.products.show');
 

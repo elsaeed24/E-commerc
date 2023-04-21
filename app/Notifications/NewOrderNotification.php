@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
@@ -39,9 +40,9 @@ class NewOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        // return ['database','broadcast', FcmChannel::class];
+        return ['database','broadcast', FcmChannel::class];
 
-        return [FcmChannel::class];
+      //  return [FcmChannel::class];
     }
 
     /**
@@ -103,6 +104,11 @@ class NewOrderNotification extends Notification
                 ApnsConfig::create()
                     ->setFcmOptions(ApnsFcmOptions::create()->setAnalyticsLabel('analytics_ios')));
     }
+
+
+
+
+
 
     /**
      * Get the array representation of the notification.

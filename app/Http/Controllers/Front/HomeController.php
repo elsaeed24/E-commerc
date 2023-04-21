@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Services\GeoIP\MaxMindGeoLite;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,24 @@ class HomeController extends Controller
             'latest' => $latest
         ]);
     }
+
+    public function sms()
+    {
+        $config = config('services.vonage');
+
+        $basic  = new \Vonage\Client\Credentials\Basic($config['vonage_key'], $config['vonage_secret']);
+         $client = new \Vonage\Client($basic);
+
+         $user = Auth::user();
+
+         $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS( $user->mobile, 'web developer' , 'hello '. $user->email));
+
+            return response()->json('sms message has been successfully');
+
+    }
+
+
 
 
 }

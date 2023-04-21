@@ -23,7 +23,8 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'name',
         'email',
         'password',
-        'device_token'
+        'device_token',
+        'mobile'
     ];
 
     /**
@@ -74,5 +75,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     {
         return $this->deviceTokens()->pluck('token')->toArray();
     }
+
+
 
 }
