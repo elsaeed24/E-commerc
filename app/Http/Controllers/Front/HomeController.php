@@ -35,7 +35,7 @@ class HomeController extends Controller
          $user = Auth::user();
 
          $response = $client->sms()->send(
-            new \Vonage\SMS\Message\SMS( $user->mobile, 'web developer' , 'hello '. $user->email));
+            new \Vonage\SMS\Message\SMS( $user->mobile, 'web developer' ,'hello ' . $user->name));
 
             return response()->json('sms message has been successfully');
 

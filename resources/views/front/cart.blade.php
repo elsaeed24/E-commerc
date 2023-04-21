@@ -51,7 +51,7 @@
                     </div>
                   </div>
                   <div class="ps-cart__total">
-                    <h3>Total Price: <span> {{ $total}} $</span></h3><a class="ps-btn" href="#">Process to checkout<i class="ps-icon-next"></i></a>
+                    <h3>Total Price: <span> {{ $total}} $</span></h3><a class="ps-btn" href="{{ route('checkout') }}">Process to checkout<i class="ps-icon-next"></i></a>
                   </div>
                 </div>
               </div>

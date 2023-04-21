@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use toastr;
 use App\Models\Cart;
+use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Str;
-use App\Models\Order;
 use App\Notifications\NewOrderNotification;
-use App\Models\User;
 
 
 class CartController extends Controller
@@ -65,6 +66,16 @@ class CartController extends Controller
             'product_id' => $product_id,
             'quantity' => $quantity,
         ]);
+
+        }
+
+        if ($request->expectsJson()) {
+            return [
+                 'message' => 'Product added to cart',
+                'cart' => Cart::with('product')
+                        ->where('cart_id' , App::make('cart.id'))
+                        ->get()
+            ];
         }
 
         return redirect()->back()

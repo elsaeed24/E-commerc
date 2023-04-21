@@ -71,7 +71,7 @@
                         <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>
                       </ul>
                     </div>
-                    <form action="{{ route('cart') }}" id="addToCart" method="post">
+                    <form action="{{ route('cart') }}" id="cart-form" method="post">
                             @csrf
                      <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <div class="ps-product__block ps-product__size">
@@ -96,7 +96,8 @@
                       </div>
                     </div>
                     <div class="ps-product__shopping">
-                        <a  class="ps-btn mb-10" href="javascript:;" onclick="document.getElementById('addToCart').submit()">{{ trans('Add to cart') }}<i class="ps-icon-next"></i></a>
+                        {{-- <a  class="ps-btn mb-10" href="javascript:;" onclick="document.getElementById('addToCart').submit()">{{ trans('Add to cart') }}<i class="ps-icon-next"></i></a> --}}
+                        <a id="add-to-card" class="ps-btn mb-10" href="#">{{ trans('Add to cart') }}<i class="ps-icon-next"></i></a>
                         <div class="ps-product__actions"><a class="mr-10" href="whishlist.html"><i class="ps-icon-heart"></i></a><a href="compare.html"><i class="ps-icon-share"></i></a></div>
                     </div>
                     </form>

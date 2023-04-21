@@ -19,6 +19,15 @@ class Product extends Model
         'image', 'status', 'slug', 'store_id',
     ];
 
+    protected $appends = [  // عشان القيم بتاعتهم ترجع ضمن الجيسون
+        'image_url', 'url',
+    ];
+
+    protected $hidden = [
+        'image', 'status'
+    ];
+
+
    /* protected $with = [     // if in call with('product') in controller will auto Egar loading with inside array
 
         'category','store'
@@ -91,6 +100,11 @@ class Product extends Model
         }
 
         return 'https://ui-avatars.com/api/?name=' . $this->name;
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('front.products.show', $this->slug);
     }
 
     // Mutators

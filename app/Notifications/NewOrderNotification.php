@@ -40,9 +40,9 @@ class NewOrderNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database','broadcast', FcmChannel::class];
+        return ['database','broadcast'];
 
-      //  return [FcmChannel::class];
+        return [FcmChannel::class];
     }
 
     /**

@@ -21,7 +21,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <meta name="keywords" content="Default Description">
     <meta name="description" content="Default keyword">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sky - Cart</title>
+    <title>Sky - Home</title>
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -41,6 +41,8 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/revolution/css/settings.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/revolution/css/layers.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/revolution/css/navigation.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Custom-->
     {{-- @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') --}}
     {{-- <link rel="stylesheet" href="{{ asset('front/assets/css/style.rtl.css') }}"> --}}
@@ -196,27 +198,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
               <button><i class="ps-icon-search"></i></button>
             </form>
 
-            {{-- <x-cart /> --}}
-            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i id="cart-items"></i></span><i class="ps-icon-shopping-cart"></i></a>
-                <div class="ps-cart__listing">
-                    <div class="ps-cart__content" id="cart-list">
-                        {{-- @foreach ($cart as $item) --}}
-                        <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                            <div class="ps-cart-item__thumbnail"><a href="#"></a><img src="" alt=""></div>
-                            <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="#"></a>
-                                <p><span>Quantity:<i></i></span><span>Total:<i></i></span></p>
-                            </div>
-                        </div>
-                        {{-- @endforeach --}}
-                    </div>
-                    <div class="ps-cart__total">
-                        <p>Number of items:<span></span></p>
-                        <p>Item Total:<span></span></p>
-                    </div>
-                    <div class="ps-cart__footer"><a class="ps-btn" href="{{ route('checkout') }}">Check out<i class="ps-icon-arrow-left"></i></a></div>
-                </div>
-            </div>
-
+            <x-cart />
 
             <div class="menu-toggle"><span></span></div>
           </div>
@@ -373,6 +355,9 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
 <script type="text/javascript" src="{{ asset('front/assets/plugins/revolution/js/extensions/revolution.extension.navigation.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('front/assets/plugins/revolution/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('front/assets/plugins/revolution/js/extensions/revolution.extension.actions.min.js') }}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Custom scripts-->
     <script type="text/javascript" src="{{ asset('front/assets/js/main.js') }}"></script>
 
@@ -381,6 +366,8 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     {{-- <script type="text/javascript" src="{{ asset('dashboard/assets/js/messages.js') }}"></script> --}}
 
     <script type="text/javascript" src="{{ asset('dashboard/assets/js/cart.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('front/assets/js/cart.js') }}"></script>
 
 
      <script>
