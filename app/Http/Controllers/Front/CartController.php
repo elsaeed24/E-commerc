@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Interfaces\CartRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Notifications\NewOrderNotification;
@@ -18,24 +19,31 @@ use App\Notifications\NewOrderNotification;
 
 class CartController extends Controller
 {
+    protected $cart;
+
+    public function __construct(CartRepositoryInterface $cart){
+
+        $this->cart = $cart;
+    }
+
+
     public function index()
 
-
     {
-
-
-
-
-        // app(cart.id)  or app()->make('cart.id')  or App::make('cart.id')      طرق لجلب القيمة من السيرفيز كونتينر
-        $cart = Cart::with('product')
+   // app(cart.id)  or app()->make('cart.id')  or App::make('cart.id')      طرق لجلب القيمة من السيرفيز كونتينر
+      /*  $cart = Cart::with('product')
                     ->where('cart_id' , App::make('cart.id'))
-                    ->get();
+                    ->get(); */
 
-       $total = $cart->sum(function($item){
+     /*  $total = $cart->sum(function($item){
          return   $item->product->price * $item->quantity;
-        });
+        });*/
 
-        return view('front.cart',compact('cart','total'));
+
+        return view('front.cart',[
+            'cart'  => $this->cart->getAll(),
+           'total' => $this->cart->total()
+        ]);
     }
 
     public function store(Request $request)
@@ -45,7 +53,7 @@ class CartController extends Controller
             'quantity' => 'integer|min:1'
         ]);
 
-        $cart_id = App::make('cart.id');
+      /*  $cart_id = App::make('cart.id');
         $product_id = $request->post('product_id');
         $quantity = $request->post('quantity',1);
 
@@ -67,14 +75,15 @@ class CartController extends Controller
             'quantity' => $quantity,
         ]);
 
-        }
+        }*/
+
+        $product = Product::findOrFail($request->product_id);
+        $this->cart->add($request->product_id, $request->input('quantity', 1));
 
         if ($request->expectsJson()) {
             return [
                  'message' => 'Product added to cart',
-                'cart' => Cart::with('product')
-                        ->where('cart_id' , App::make('cart.id'))
-                        ->get()
+                'cart' => $this->cart->getAll()
             ];
         }
 
@@ -94,4 +103,30 @@ class CartController extends Controller
 
         return $id;
     }*/
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,$product_id)
+    {
+        $request->validate([
+           // 'product_id' => ['required','int','exists:products,id'],
+            'quantity'  => ['required','int','min:1'],
+        ]);
+
+       $product = Product::findOrFail($request->product_id);
+        $this->cart->update($request->product_id,$request->post('quantity'));
+    }
+
+
+    public function destroy($product_id)
+    {
+        $this->cart->delete($product_id);
+        return redirect()->back()
+            ->with('status', "Item removed from cart.");
+
+    }
 }

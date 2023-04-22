@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\MessageController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,16 @@ Route::any('payments/paypal/cancel', [PaymentController::class, 'cancel'])->name
 Route::get('messages', [MessageController::class, 'index'])->name('messages');
 Route::get('messages/{peer_id}', [MessageController::class, 'show'])->name('messages.peer');
 Route::post('messages/{peer_id}', [MessageController::class, 'store']);
+
+Route::get('validate/email/{email}', function($email) {
+
+    $exists = User::where('email', '=', $email)->exists();
+    return [
+        'exists' => $exists,
+        'msg' => $exists? 'Email already used' : 'Email avialable',
+    ];
+
+})->name('validate.email');
 
 
 require __DIR__.'/dashboard.php';
