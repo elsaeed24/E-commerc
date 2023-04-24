@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\NewProductEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('optimize:clear')->dailyAt('04:00');
+
+        // $job = new NewProductEmail();
+        // $job->onConnection('database')->onQueue('emails');
+
+        // $schedule->job($job)
+        // ->onSuccess(function(){
+
+        // })
+        // ->onFailure(function(){
+
+        // })
+        // ->everyMinute();
+
+        $schedule->job(new NewProductEmail())->everyMinute();
     }
 
     /**

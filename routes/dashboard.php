@@ -27,6 +27,9 @@ Route::prefix('admin')->middleware('auth:store','notification.read')->group(func
     $router->addController('get','products/trash', ProductController::class,'trash','products.trash');
     $router->addController('put','products/trash/{id}', ProductController::class,'restore','products.restore');
     $router->addController('delete','products/trash/{id}', ProductController::class,'forceDelete','products.force-delete');
+    $router->addController('get','products/export', ProductController::class,'export','products.export');
+    $router->addController('get','products/import', ProductController::class,'importView','products.import');
+    $router->addController('post','products/import', ProductController::class,'import');
     $router->addRoute('resource','products',ProductController::class);
 
 

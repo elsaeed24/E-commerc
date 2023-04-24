@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Test\PaymentMethodController;
 use App\Models\User;
 
 /*
@@ -33,6 +34,7 @@ Route::get('/dashboard2', function () {
 
 Route::get('home',[HomeController::class,'index'])->name('home.index');
 Route::get('sms',[HomeController::class,'sms']);
+Route::get('/newsletter', [HomeController::class, 'newsletter']);
 
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('front.products.show');
 
@@ -62,6 +64,12 @@ Route::get('validate/email/{email}', function($email) {
     ];
 
 })->name('validate.email');
+
+/********************************* start test PaymentsFactories */
+
+    Route::get('/paymentmethod/{type}',[PaymentMethodController::class,'payments']);
+
+ /**************************** end test PaymentsFactories */
 
 
 require __DIR__.'/dashboard.php';

@@ -34,6 +34,8 @@
         @can('create', App\Models\Product::class)
         <a  href="{{ route('products.trash') }}" class="btn btn-lg btn-outline-warning ml-2">Trash</a>
         @endcan
+        <a href="{{ route('products.export')}}" class="btn btn-lg btn-outline-dark ml-2">Export</a>
+        <a href="{{ route('products.import') }}" class="btn btn-lg btn-outline-success ml-2">Import</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">

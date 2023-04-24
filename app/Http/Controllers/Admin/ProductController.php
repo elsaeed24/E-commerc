@@ -8,12 +8,15 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use App\Repositories\Repository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\ProductRequest;
-use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\RepositoryInterface;
 
 class ProductController extends Controller
 {
@@ -253,5 +256,32 @@ class ProductController extends Controller
         return redirect()
             ->route('products.trash')
             ->with('success', 'Product deleted forever.');
+    }
+
+    public function export(Request $request)
+    {
+        // $query = $this->query($request);
+
+         $export = new ProductExport();
+        // $export->setQuery($query);
+
+        return Excel::download($export, 'products.xlsx');
+    }
+
+    public function importView()
+    {
+        return view('admin.products.import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => ['required', 'mimes:xls,xlsx,csv'],
+        ]);
+
+        Excel::import(new ProductImport, $request->file('file')->path());
+
+        return redirect()->route('products.index')
+            ->with('success', "Products imported!");
     }
 }

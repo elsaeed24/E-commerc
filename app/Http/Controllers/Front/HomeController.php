@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Services\GeoIP\MaxMindGeoLite;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Jobs\NewProductEmail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Services\GeoIP\MaxMindGeoLite;
 
 class HomeController extends Controller
 {
@@ -39,6 +41,15 @@ class HomeController extends Controller
 
             return response()->json('sms message has been successfully');
 
+    }
+
+    public function newsletter()
+    {
+        dispatch(new NewProductEmail())
+            ->onQueue('emails')
+            ->delay(Carbon::now()->addMinutes(5));
+
+        dispatch(new NewProductEmail())->onQueue('emails');
     }
 
 
