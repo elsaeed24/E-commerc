@@ -1,8 +1,9 @@
 <x-guest-layout>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form class="user" method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -43,5 +44,12 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+        <a href="{{ route('auth.socialite.redirect', 'google')}}" class="btn btn-google btn-user btn-block">
+            <i class="fab fa-google fa-fw"></i> Login with Google
+        </a>
+        <a href="{{ route('auth.socialite.redirect', 'facebook')}}" class="btn btn-facebook btn-user btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+        </a>
     </form>
+
 </x-guest-layout>

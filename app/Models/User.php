@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable /*implements MustVerifyEmail*/
 {
@@ -24,7 +25,10 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'email',
         'password',
         'device_token',
-        'mobile'
+        'mobile',
+        'provider',
+        'provider_id',
+        'provider_token',
     ];
 
     /**
@@ -35,6 +39,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     protected $hidden = [
         'password',
         'remember_token',
+        'provider_token',
     ];
 
     /**
@@ -74,6 +79,16 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     public function routeNotificationForFcm($notification = null)
     {
         return $this->deviceTokens()->pluck('token')->toArray();
+    }
+
+    public function setProviderTokenAttribute($value)
+    {
+        $this->attributes['provider_token'] = Crypt::encryptString($value);
+    }
+
+    public function getProviderTokenAttribute($value)
+    {
+        return Crypt::decryptString($value);
     }
 
 

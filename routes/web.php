@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialitesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Front\CartController;
@@ -64,6 +65,10 @@ Route::get('validate/email/{email}', function($email) {
     ];
 
 })->name('validate.email');
+
+
+Route::get('auth/{provider}/redirect', [SocialitesController::class,'redirect'])->name('auth.socialite.redirect');
+Route::get('auth/{provider}/callback',[SocialitesController::class,'callback'])->name('auth.socialite.callback');
 
 /********************************* start test PaymentsFactories */
 
