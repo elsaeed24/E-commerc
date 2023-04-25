@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Store extends Authenticatable
+class Store extends Authenticatable /*implements MustVerifyEmail*/
 {
     use HasFactory,HasApiTokens,Notifiable;
 
     protected $fillable = [
-        'name', 'slug','email','password','type'
+        'name', 'slug','email','password','type','email_verified_at'
     ];
 
     const CREATED_AT = 'created_at';

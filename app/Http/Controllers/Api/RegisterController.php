@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Store;
+use App\Notifications\EmailVerificationNotification;
 use Illuminate\Support\Facades\Response;
 
 class RegisterController extends Controller
@@ -30,11 +31,14 @@ class RegisterController extends Controller
 
        $user = Store::create($request->all());
 
-       $token = $user->createToken('user',['app:all']);
+       $token = $user->createToken('user',['app:all'])->plainTextToken;
+
+        $user->notify(new EmailVerificationNotification());
+
 
        return Response::json([
         'status' => 'true',
-        'token' => $token->plainTextToken,
+        'token' => $token,
         'user' => $user,
        ],200);
 

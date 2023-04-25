@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\DeviceTokenController;
+use App\Http\Controllers\Api\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,5 @@ Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanc
 
 Route::post('device-tokens', [DeviceTokenController::class, 'store'])
     ->middleware('auth:sanctum');
+
+Route::post('email_verification',[EmailVerificationController::class,'email_verification']);
