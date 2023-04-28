@@ -1,4 +1,6 @@
 <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i id="cart-items">{{ $cart->count() }}</i></span><i class="ps-icon-shopping-cart"></i></a>
+
+
     <div class="ps-cart__listing">
         <div class="ps-cart__content" id="cart-list">
             @foreach ($cart as $item)
@@ -14,6 +16,6 @@
             <p>Number of items:<span>{{ $cart->count() }}</span></p>
             <p>Item Total:<span>{{ $total }}</span></p>
         </div>
-        <div class="ps-cart__footer"><a class="ps-btn" href="{{ route('cart') }}">Check out<i class="ps-icon-arrow-left"></i></a></div>
+        <div class="ps-cart__footer"><a class="ps-btn" href="{{ route('cart') }}">View Cart<i class="ps-icon-arrow-left"></i></a></div>
     </div>
 </div>

@@ -37,15 +37,27 @@
                     <label for="">Status</label>
                    <div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" value="active" @checked($order->status == "active") >
+                        <input class="form-check-input" type="radio" name="status" value="new" @checked($order->status == "new")>
                         <label class="form-check-label" >
-                          Active
+                            New
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status"  value="inactive" @checked($order->status == "inactive")>
+                        <input class="form-check-input" type="radio" name="status"  value="processing" @checked($order->status == "processing")>
                         <label class="form-check-label" >
-                          Inactive
+                            Processing
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status"  value="in-delivery" @checked($order->status == "in-delivery")>
+                        <label class="form-check-label" >
+                            In-Delivery
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status"  value="completed" @checked($order->status == "completed")>
+                        <label class="form-check-label" >
+                            Complete
                         </label>
                       </div>
                    </div>

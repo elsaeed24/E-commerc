@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+use ArPHP\I18N\Arabic;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
@@ -24,8 +26,11 @@ class OrderController extends Controller
 
     public function update(Request $request,$id)
     {
+        $request->validate([
+            'status' => 'in:new,processing,in-delivery,completed'
+        ]);
 
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
          Order::where('id',$id)->update(['status'=> $request->status]);
 
@@ -66,5 +71,16 @@ class OrderController extends Controller
         return redirect()
             ->route('orders.trash')
             ->with('success', 'Category deleted forever.');
+    }
+
+    public function print(Order $order)
+    {
+        $ar = new Arabic();
+        $pdf = PDF::loadView('admin.orders.invoice', [
+            'order' => $order,
+            'ar' => $ar,
+        ]);
+
+        return $pdf->stream();
     }
 }

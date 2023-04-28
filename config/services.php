@@ -58,4 +58,9 @@ return [
         'redirect' =>  env('APP_URL') . '/auth/facebook/callback'
       ],
 
+      'custom-sms' => [
+        'account_sid' => env('ACCOUNT_SID'),
+        'auth_token' => env('AUTH_TOKEN')
+      ]
+
 ];

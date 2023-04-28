@@ -43,11 +43,11 @@
                   <div class="ps-cart__promotion">
                     <div class="form-group">
                       <div class="ps-form--icon"><i class="fa fa-angle-right"></i>
-                        <input class="form-control" type="text" placeholder="Promo Code">
+                        <input class="form-control" name="coupon_code" type="text" placeholder="Promo Code">
                       </div>
                     </div>
                     <div class="form-group">
-                      <button class="ps-btn ps-btn--gray">Continue Shopping</button>
+                      <button type="button" class="ps-btn ps-btn--gray" id="coupon_apply">Apply</button>
                     </div>
                   </div>
                   <div class="ps-cart__total">

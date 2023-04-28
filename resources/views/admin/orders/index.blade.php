@@ -60,14 +60,17 @@
                             <td>{{ $order->address }}</td>
                             <td>{{ $order->phone }}</td>
                             <td>{{ $order->total }}</td>
-                            <td><button class="btn btn-sm btn-primary">{{ $order->status }}</button></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">{{ $order->status }}</button>
+                            </td>
                             <td>{{ $order->created_at }}</td>
 
                             <td>
                                 {{-- @if (Auth::guard('store')->user()->can('delete', $order))     --}}
                                 {{-- @can('delete', $order) --}}
+                                <div style="display: flex;">
 
-                                <form action="{{ route('orders.destroy', $order->id) }}" method="post">
+                                <form style="margin-right: 5px;flex:1" action="{{ route('orders.destroy', $order->id) }}" method="post">
                                     @csrf
                                     {{-- from method spoofing --}}
                                     @method('delete')
@@ -77,6 +80,8 @@
                                 {{-- @endif --}}
 
                                 {{-- @endcan --}}
+                                <a style="margin-right: 5px;flex:1" href="{{ route('orders.print', $order->id) }}" class="btn btn-sm btn-info">Print</a>
+                            </div>
                             </td>
 
                         </tr>

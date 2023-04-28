@@ -8,7 +8,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
 <!--[if IE 7]><html class="ie ie7"><![endif]-->
 <!--[if IE 8]><html class="ie ie8"><![endif]-->
 <!--[if IE 9]><html class="ie ie9"><![endif]-->
-<html lang="en" >
+<html lang="{{ App::currentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,11 +27,11 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/ps-icon/style.css') }}">
     <!-- CSS Library-->
-    {{-- @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') --}}
-    {{-- <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.rtl.min.css') }}"> --}}
-    {{-- @else --}}
+    @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+    <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.rtl.min.css') }}">
+    @else
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/bootstrap/dist/css/bootstrap.min.css') }}">
-    {{-- @endif --}}
+    @endif
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/owl-carousel/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css') }}">
     <link rel="stylesheet" href="{{ asset('front/assets/plugins/slick/slick/slick.css') }}">
@@ -44,11 +44,11 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Custom-->
-    {{-- @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl') --}}
-    {{-- <link rel="stylesheet" href="{{ asset('front/assets/css/style.rtl.css') }}"> --}}
-    {{-- @else --}}
+    @if (LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+    <link rel="stylesheet" href="{{ asset('front/assets/css/style.rtl.css') }}">
+    @else
     <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
-    {{-- @endif --}}
+    @endif
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--WARNING: Respond.js doesn't work if you view the page via file://-->
     <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -75,7 +75,10 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
                     <form action="{{ route('logout') }}" id="logout" method="post" style="display:none">
                         @csrf
                     </form>
+
+                    <x-language-switcher />
                 </div>
+
                 @else
 
                     <div class="header__actions"><a href="{{ route('register') }}">Login & Regiser</a>
@@ -87,7 +90,7 @@ Replace: href="{{ asset('assets/$1') }}", src="{{ asset('assets/$1') }}"
                         <li><a href="#"><img src="{{ asset('front/assets/images/flag/japan.svg') }}" alt=""> JPN</a></li>
                       </ul>
                     </div>
-                    {{-- <x-language-switcher /> --}}
+
                   </div>
                   @endauth
 

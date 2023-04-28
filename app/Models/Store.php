@@ -54,6 +54,13 @@ class Store extends Authenticatable /*implements MustVerifyEmail*/
         return false;
     }
 
+    public function routeNotificationForSms($notification = null)
+    {
+        return $this->mobile;
+    }
+
+
+
 
 
 

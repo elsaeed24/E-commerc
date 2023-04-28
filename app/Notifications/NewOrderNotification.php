@@ -110,6 +110,7 @@ class NewOrderNotification extends Notification
 
 
 
+
     /**
      * Get the array representation of the notification.
      *

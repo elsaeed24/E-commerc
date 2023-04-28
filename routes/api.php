@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\DeviceTokenController;
 use App\Http\Controllers\Api\EmailVerificationController;
+use App\Http\Controllers\Api\ForgetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,6 @@ Route::post('device-tokens', [DeviceTokenController::class, 'store'])
     ->middleware('auth:sanctum');
 
 Route::post('email_verification',[EmailVerificationController::class,'email_verification']);
+
+Route::post('password/forget-password' ,[ForgetPasswordController::class, 'forgetPassword']);
+Route::post('password/reset' ,[ForgetPasswordController::class, 'resetPassword']);

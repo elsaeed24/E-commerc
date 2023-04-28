@@ -188,7 +188,8 @@ return [
 
          Maatwebsite\Excel\ExcelServiceProvider::class,
          Ichtrojan\Otp\OtpServiceProvider::class,
-
+         Intervention\Image\ImageServiceProvider::class,
+         Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -220,6 +221,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Otp' => Ichtrojan\Otp\Otp::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];

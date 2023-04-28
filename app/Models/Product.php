@@ -102,6 +102,18 @@ class Product extends Model
         return 'https://ui-avatars.com/api/?name=' . $this->name;
     }
 
+    public function getThumbUrlAttribute()  // resize for image
+    {
+        if ($this->image) {
+
+           return route('images', [
+            'uploads' ,'265' ,'265' , $this->image
+           ]);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . $this->name;
+    }
+
     public function getUrlAttribute()
     {
         return route('front.products.show', $this->slug);

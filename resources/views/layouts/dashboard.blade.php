@@ -92,6 +92,13 @@
 
               <!-- Nav Item - Dashboard -->
               <li class="nav-item active">
+                <a class="nav-link" href="{{ route('coupons.index') }}">
+                    <i class="fas fa-box nav-icon"></i>
+                    <span>Coupons</span></a>
+            </li>
+
+              <!-- Nav Item - Dashboard -->
+              <li class="nav-item active">
                 <a class="nav-link" href="{{ route('roles.index') }}">
                     <i class="fas fa-box nav-icon"></i>
                     <span>Roles</span></a>

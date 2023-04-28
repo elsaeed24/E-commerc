@@ -1,16 +1,19 @@
 <?php
 
-use App\Http\Controllers\Auth\SocialitesController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\CouponController;
 use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\CheckoutController;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Auth\SocialitesController;
 use App\Http\Controllers\Test\PaymentMethodController;
-use App\Models\User;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,21 +35,27 @@ Route::get('/dashboard2', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::group([
+    'prefix' => LaravelLocalization::setLocale()
+],function(){
+
 
 Route::get('home',[HomeController::class,'index'])->name('home.index');
 Route::get('sms',[HomeController::class,'sms']);
 Route::get('/newsletter', [HomeController::class, 'newsletter']);
 
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('front.products.show');
-
-
 Route::get('cart',[CartController::class,'index'])->name('cart');
 Route::post('cart',[CartController::class,'store']);
 Route::delete('cart/{product_id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
+Route::get('coupons',[CouponController::class,'show'])->name('coupons');
+
 
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('checkout', [CheckoutController::class, 'store']);
+
+});
 
 Route::get('payments/{order}', [PaymentController::class, 'create'])->name('payments.create');
 Route::any('payments/paypal/callback', [PaymentController::class, 'callback'])->name('paypal.callback');
@@ -75,6 +84,11 @@ Route::get('auth/{provider}/callback',[SocialitesController::class,'callback'])-
     Route::get('/paymentmethod/{type}',[PaymentMethodController::class,'payments']);
 
  /**************************** end test PaymentsFactories */
+
+ // images/300x200/products/image.png
+Route::get('images/{disk}/{width}x{height}/{image}', [ImageController::class, 'index'])
+                    ->name('images');
+                    // ->where('image', '.*');
 
 
 require __DIR__.'/dashboard.php';

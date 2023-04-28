@@ -53,17 +53,19 @@
                         <option value="1">3</option>
                         <option value="1">4</option>
                         <option value="2">5</option>
-                      </select><a href="#">({{ trans_choice('app.read_reviews', 2, ['count' => 2]) }})</a>
+                      </select><a href="#">({{ trans_choice('app.read_reviews', 1, ['count' => 1]) }})</a>
                     </div>
                     <h1>{{ $product->name }}</h1>
                     <p class="ps-product__category"><a href="#">{{ $product->category->name }}</a></p>
                     <h3 class="ps-product__price">${{ $product->price }} <del>${{ $product->sale_price }}</del></h3>
                     <div class="ps-product__block ps-product__quickview">
                       <h4>@lang('QUICK REVIEW')</h4>
+
                       <p>{{ $product->description }}</p>
                     </div>
                     <div class="ps-product__block ps-product__style">
                       <h4>{{ __('CHOOSE YOUR STYLE') }}</h4>
+
                       <ul>
                         <li><a href="product-detail.html"><img src="images/shoe/sidebar/1.jpg" alt=""></a></li>
                         <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>

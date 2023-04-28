@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Auth\AuthStore\LoginController;
 
 Route::prefix('admin')->middleware('auth:store','notification.read')->group(function () {
@@ -33,10 +34,13 @@ Route::prefix('admin')->middleware('auth:store','notification.read')->group(func
     $router->addRoute('resource','products',ProductController::class);
 
 
+    $router->addController('get','orders/{order}/print',OrderController::class,'print','orders.print');
     $router->addController('get','orders/trash', OrderController::class,'trash','orders.trash');
     $router->addController('put','orders/trash/{id}', OrderController::class,'restore','orders.restore');
     $router->addController('delete','orders/trash/{id}', OrderController::class,'forceDelete','orders.force-delete');
     $router->addRoute('resource','orders',OrderController::class);
+
+    $router->addRoute('resource','coupons',CouponController::class);
 
 
     $router->addController('get','dashboard', DashboardController::class,'index','dashboard.index');
