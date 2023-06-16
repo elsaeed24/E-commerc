@@ -40,16 +40,7 @@
     <div class="card-body">
         <div class="table-responsive">
 
-            {{-- <form action="{{ URL::current() }}" method="get" class="d-flex mb-4">
-                <input type="text" name="name" class="form-control me-2" placeholder="Search by name">
-                <select name="parent_id" class="form-control me-2">
-                    <option value="">All Categories</option>
-                    @foreach ($parents as $parent)
-                    <option value="{{ $parent->id }}">{{ $parent->name }}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-secondary">Filter</button>
-            </form> --}}
+
 
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -74,8 +65,7 @@
                         <td>{{ $coupon->created_at }}</td>
 
                         <td>
-                            {{-- @if (Auth::guard('store')->user()->can('delete', $coupon))     --}}
-                            @can('delete', $coupon)
+
 
                             <form action="{{ route('coupons.destroy', $coupon->id) }}" method="post">
                                 @csrf
@@ -84,9 +74,7 @@
                                 <button type="submit"  class="btn btn-sm btn-danger">Delete</button>
 
                             </form>
-                            {{-- @endif --}}
 
-                            @endcan
                         </td>
 
                     </tr>

@@ -44,6 +44,7 @@
                     <div class="form-group">
                       <div class="ps-form--icon"><i class="fa fa-angle-right"></i>
                         <input class="form-control" name="coupon_code" type="text" placeholder="Promo Code">
+                        <input class="form-control" name="discount" id="discount" type="hidden">
                       </div>
                     </div>
                     <div class="form-group">

@@ -7,7 +7,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h3 style="display: inline-block;" class="m-0 font-weight-bold">Edit Coupon</h3>
+            <h3 style="display: inline-block;" class="m-0 font-weight-bold">Edit Discount Coupon</h3>
 
         </div>
         <div class="card-body">

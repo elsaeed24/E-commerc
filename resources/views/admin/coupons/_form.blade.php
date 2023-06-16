@@ -10,7 +10,7 @@
 
 <div class="form-group mb-3">
     <label for="">Code:</label>
-    <input type="text" name="code" value="{{ old('code', $coupon->name) }}" class="form-control @error('code') is-invalid @enderror">
+    <input type="text" name="code" value="{{ old('code', $coupon->code) }}" class="form-control @error('code') is-invalid @enderror">
     @error('code')
     <p class="invalid-feedback">{{ $message }}</p>
     @enderror

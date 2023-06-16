@@ -12,4 +12,20 @@ class Coupon extends Model
     protected $fillable =[
         'name','code','type','discription','discount','start_at','expir_at'
     ];
+
+            public static function findByCode($code){
+                return self::where('code',$code)->first();
+            }
+
+            public function discount($total){
+                if($this->type=="fixed"){
+                    return $this->value;
+                }
+                elseif($this->type=="percent"){
+                    return ($this->value /100)*$total;
+                }
+                else{
+                    return 0;
+                }
+            }
 }
